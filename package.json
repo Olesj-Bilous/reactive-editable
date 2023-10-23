@@ -1,6 +1,5 @@
 {
   "name": "reactive-editable",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -25,5 +24,9 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.6.0"
-  }
+  },
+  "description": "Extend your React app with the most common togglable edit functionality.",
+  "repository": "https://github.com/Olesj-Bilous/reactive-editable.git",
+  "author": "Olesj Vladyslavovitsj Bilous <olesjvbilous@gmail.com>",
+  "license": "MIT"
 }
