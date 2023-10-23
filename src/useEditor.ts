@@ -5,12 +5,20 @@ export type Settable<T> = [
   set: (value: T) => void
 ]
 
-export function useEditor<T>() {
+export function useEditor<T>([global, setGlobal]: Settable<T>) {
   const [local, setLocal] = useState(global)
 
-  const isTouched = useMemo(
-    () => !Object.is(local, global),
-    [local, global]
+  const property = useCallback(
+    <K extends keyof T>(key: K): Settable<T[K]> => [
+      local[key],
+      (value: T[K]) => setLocal(
+        state => ({
+          ...state,
+          [key]: value
+        })
+      )
+    ],
+    [local]
   )
 
   const revert = useCallback(
@@ -20,12 +28,17 @@ export function useEditor<T>() {
 
   const save = useCallback(
     () => setGlobal(local),
-    [setGlobal, local]
+    [local] // eslint-disable-line react-hooks/exhaustive-deps
+  )
+
+  const isTouched = useMemo(
+    () => !Object.is(local, global),
+    [local, global]
   )
 
   return {
-    local,
     isTouched,
+    property,
     revert,
     save
   }

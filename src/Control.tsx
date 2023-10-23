@@ -1,22 +1,9 @@
 import { ReactNode, memo } from 'react'
-import { useEditableControl, useEditableEffects } from './Context'
-
-export type ControlKey = 'add' | 'update'
-
-export const Save = memo(
-  ({ children, className }: { children?: ReactNode, className?: string }) => {
-    const { isTouched, isValid } = useEditableControl()
-    const { save } = useEditableEffects()
-
-    return <button className={className ?? 'save'} disabled={!isTouched || !isValid} onClick={save}>
-      {children}
-    </button>
-  }
-)
+import { useEditControl, useEditEffects } from './Context'
 
 export const ToggleEdit = memo(
   ({ children, className }: { children?: ReactNode, className?: string }) => {
-    const { toggleEdit } = useEditableEffects()
+    const { toggleEdit } = useEditEffects()
 
     return (
       <button className={className ?? 'toggle-edit'} onClick={toggleEdit}>
@@ -28,8 +15,8 @@ export const ToggleEdit = memo(
 
 export const Revert = memo(
   ({ children, className }: { children?: ReactNode, className?: string }) => {
-    const { isTouched } = useEditableControl()
-    const { revert } = useEditableEffects()
+    const { isTouched } = useEditControl()
+    const { revert } = useEditEffects()
 
     return <button className={className ?? 'revert'} disabled={isTouched} onClick={revert}>
       {children}
@@ -37,50 +24,25 @@ export const Revert = memo(
   }
 )
 
+export const Save = memo(
+  ({ children, className }: { children?: ReactNode, className?: string }) => {
+    const { isTouched, isValid } = useEditControl()
+    const { save } = useEditEffects()
+
+    return <button className={className ?? 'save'} disabled={!isTouched || !isValid} onClick={save}>
+      {children}
+    </button>
+  }
+)
+
 export const Remove = memo(
   ({ children, className }: { children?: ReactNode, className?: string }) => {
-    const { isTouched } = useEditableControl()
-    const { remove } = useEditableEffects()
+    const { mode } = useEditControl()
+    const { remove } = useEditEffects()
 
-    return <>{remove && <button className={className ?? 'remove'} disabled={isTouched} onClick={remove}>
+    return <>{mode !== 'create' && remove && <button className={className ?? 'remove'} onClick={remove}>
       {children}
     </button>}</>
   }
 )
 
-export const EditControl = memo(
-  ({ create, hide, remove }: { create?: boolean, hide?: () => void, remove?: () => void }) => {
-    const { editToggled, toggleEdit, isTouched, save, revert } = useEditableControl()
-
-    const saveAction = create ? () => { save(); revert(); hide && hide() } : save
-
-    return (
-      <div className="control">
-        {create && <button onClick={() => toggleEdit(!editToggled)}>
-          {editToggled ? <>preview</> : <>edit</>}
-        </button>}
-        {
-          editToggled && <>
-            {
-              !create && <button onClick={() => toggleEdit(false)}>
-                cancel
-              </button>
-            }
-            <button disabled={!create && !isTouched} onClick={saveAction}>
-              save
-            </button>
-            <button disabled={!isTouched} onClick={revert}>
-              undo
-            </button>
-            {!create && remove && <button onClick={remove}>
-              edit
-            </button>}
-          </>
-        }
-        {
-          create && hide && <button onClick={hide}>cancel</button>
-        }
-      </div>
-    )
-  }
-)
