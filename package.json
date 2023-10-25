@@ -1,7 +1,21 @@
 {
   "name": "reactive-editable",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "description": "Extend your React app with the most common togglable edit functionality.",
+  "repository": "https://github.com/Olesj-Bilous/reactive-editable.git",
+  "author": "Olesj Vladyslavovitsj Bilous <olesjvbilous@gmail.com>",
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/reactive-editable.umd.js",
+  "module": "./dist/reactive-editable.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/reactive-editable.es.js",
+      "require": "./dist/reactive-editable.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -24,9 +38,5 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.6.0"
-  },
-  "description": "Extend your React app with the most common togglable edit functionality.",
-  "repository": "https://github.com/Olesj-Bilous/reactive-editable.git",
-  "author": "Olesj Vladyslavovitsj Bilous <olesjvbilous@gmail.com>",
-  "license": "MIT"
+  }
 }
