@@ -1,11 +1,14 @@
 {
   "name": "reactive-editable",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Extend your React app with the most common togglable edit functionality.",
   "repository": "https://github.com/Olesj-Bilous/reactive-editable.git",
   "author": "Olesj Vladyslavovitsj Bilous <olesjvbilous@gmail.com>",
   "license": "MIT",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/reactive-editable.umd.js",
   "module": "./dist/reactive-editable.es.js",
   "types": "./dist/index.d.ts",
