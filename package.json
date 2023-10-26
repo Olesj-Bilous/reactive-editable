@@ -1,6 +1,6 @@
 {
   "name": "reactive-editable",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Extend your React app with the most common togglable edit functionality.",
   "repository": "https://github.com/Olesj-Bilous/reactive-editable.git",
   "author": "Olesj Vladyslavovitsj Bilous <olesjvbilous@gmail.com>",
