@@ -16,7 +16,7 @@ export function Revert({ children, className }: { children?: ReactNode, classNam
   const { isTouched } = useEditControl()
   const { revert } = useEditEffects()
 
-  return <button className={className ?? 'revert'} disabled={isTouched} onClick={revert}>
+  return <button type="reset" className={className ?? 'revert'} disabled={isTouched} onClick={revert}>
     {children}
   </button>
 }
@@ -26,7 +26,7 @@ export function Save({ children, className }: { children?: ReactNode, className?
   const { isTouched, isValid } = useEditControl()
   const { save } = useEditEffects()
 
-  return <button className={className ?? 'save'} disabled={!isTouched || !isValid} onClick={save}>
+  return <button type="submit" className={className ?? 'save'} disabled={!isTouched || !isValid} onClick={save}>
     {children}
   </button>
 }
